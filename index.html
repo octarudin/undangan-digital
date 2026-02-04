@@ -12,11 +12,13 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
         .font-serif-wedding { font-family: 'Great Vibes', cursive; }
         .font-sans-wedding { font-family: 'Montserrat', sans-serif; }
+        .font-arab { font-family: 'Amiri', serif; }
         
         /* Animasi putar untuk ikon musik */
         .spin-slow { animation: spin 4s linear infinite; }
@@ -26,10 +28,8 @@
         .reog-decoration {
             position: absolute;
             bottom: 0;
-            z-index: 5; /* Pastikan di atas background tapi di bawah teks modal */
-            pointer-events: none; /* Agar klik tembus ke bawah */
-            
-            /* Animasi Goyang Halus */
+            z-index: 5;
+            pointer-events: none;
             animation: goyang 3s ease-in-out infinite alternate;
         }
 
@@ -38,11 +38,11 @@
             100% { transform: rotate(2deg); }
         }
         
-        /* Posisi Awal: Sembunyi jauh di luar layar */
+        /* Posisi Awal Reog */
         .reog-left-initial { left: -100%; } 
         .reog-right-initial { right: -100%; }
         
-        /* Agar background cover penuh dan center */
+        /* Background Cover */
         .bg-cover-custom {
             background-image: url('bg-2-scaled.jpg');
             background-size: cover;
@@ -76,14 +76,27 @@
 
     <div id="invitation-content" class="hidden relative bg-stone-50 overflow-hidden min-h-screen">
 
-        <img src="reog-kiri.png" 
-             class="reog-decoration reog-left reog-left-initial w-32 md:w-64"
-             alt="Reog Kiri">
-
-        <img src="reog-kanan.webp" 
-             class="reog-decoration reog-right reog-right-initial w-40 md:w-80"
-             alt="Reog Kanan">
+        <img src="reog-kiri.png" class="reog-decoration reog-left reog-left-initial w-32 md:w-64" alt="Reog Kiri">
+        <img src="reog-kanan.webp" class="reog-decoration reog-right reog-right-initial w-40 md:w-80" alt="Reog Kanan">
         
+        <section id="ayat" class="pt-24 pb-12 px-6 text-center max-w-3xl mx-auto relative z-10">
+            <div class="bg-white/80 backdrop-blur-sm p-8 md:p-12 rounded-3xl shadow-lg border border-amber-100 transform transition-all hover:shadow-xl">
+                <div class="flex justify-center mb-6">
+                    <img src="b8a0c5b01c5bff773945200dde0e00dd.jpg" class="w-24 h-24 object-contain opacity-80" alt="Bunga Dekorasi">
+                </div>
+
+                <h3 class="text-amber-800 font-serif-wedding text-3xl md:text-4xl mb-6">Q.S Ar-Rum: 21</h3>
+                
+                <p class="font-arab text-2xl md:text-3xl text-stone-700 leading-loose mb-6" dir="rtl">
+                    وَمِنْ ءَايَٰتِهِۦٓ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَٰجًا لِّتَسْكُنُوٓا۟ إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِى ذَٰلِكَ لَءَايَٰتٍ لِّقَوْمٍ يَتَفَكَّرُونَ
+                </p>
+                
+                <p class="text-sm md:text-base text-stone-600 italic leading-relaxed">
+                    "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. Sungguh, pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang berpikir."
+                </p>
+            </div>
+        </section>
+
         <section id="mempelai" class="py-24 px-6 text-center max-w-5xl mx-auto relative z-10">
             <h2 class="text-4xl md:text-5xl font-serif-wedding text-amber-800 mb-12">Mempelai</h2>
             
@@ -160,43 +173,37 @@
             var musicBtn = $("#music-toggle");
             var isPlaying = false;
 
-            // PRELOAD AUDIO AGAR SIAP DIPUTAR
             audio.load();
 
             $("#open-invitation").click(function() {
-                // 1. TAMPILKAN KONTEN & SCROLL (LANGSUNG, TANPA MENUNGGU AUDIO)
                 $("#invitation-content").removeClass("hidden");
                 
-                // Gunakan timeout sangat kecil untuk memastikan DOM render dulu sebelum scroll
+                // UPDATE: Scroll ke #ayat (bukan #mempelai lagi)
                 setTimeout(function() {
                     $('html, body').animate({
-                        scrollTop: $("#mempelai").offset().top
-                    }, 1000); // Durasi scroll 1 detik
+                        scrollTop: $("#ayat").offset().top
+                    }, 1000);
                 }, 50);
 
-                // 2. JALANKAN ANIMASI REOG (Asynchronous)
+                // Animasi Reog
                 $(".reog-left").animate({ left: "0px" }, 2000);
                 $(".reog-right").animate({ right: "0px" }, 2000);
 
-                // 3. PUTAR MUSIK (Terakhir, jika gagal tidak memblokir scroll)
+                // Play Music
                 var playPromise = audio.play();
-
                 if (playPromise !== undefined) {
                     playPromise.then(_ => {
-                        // Audio berputar
                         isPlaying = true;
                         musicBtn.removeClass("hidden");
                     })
                     .catch(error => {
-                        // Auto-play dicegah browser, biarkan saja hening sampai user klik tombol musik
-                        console.log("Audio autoplay dicegah, menunggu interaksi user.");
-                        musicBtn.removeClass("hidden"); // Tetap munculkan tombol agar user bisa nyalakan manual
+                        console.log("Audio autoplay dicegah.");
+                        musicBtn.removeClass("hidden");
                         $(musicBtn).find("i").removeClass("spin-slow fa-music").addClass("fa-volume-mute");
                     });
                 }
             });
 
-            // Toggle Music Button Logic
             musicBtn.click(function() {
                 if (isPlaying) {
                     audio.pause();
