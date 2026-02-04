@@ -56,12 +56,8 @@
             transition: all 0.5s ease-in-out;
             pointer-events: none;
         }
-        
-        /* Posisi awal sembunyi */
         .icon-pria { left: -100px; }
         .icon-wanita { right: -100px; }
-
-        /* Posisi aktif muncul */
         .icon-pria.active { left: 20px; opacity: 1; }
         .icon-wanita.active { right: 20px; opacity: 1; }
 
@@ -125,7 +121,7 @@
         <img src="reog-kanan.webp" class="reog-decoration reog-right reog-right-initial w-40 md:w-80" alt="Reog Kanan">
         
         <section id="ayat" class="min-h-screen flex items-center justify-center px-6 py-24 bg-amber-50 relative z-10">
-            <div class="bg-white p-8 md:p-12 rounded-3xl shadow-2xl border-2 border-amber-100 max-w-3xl text-center transform hover:scale-[1.01] transition duration-500">
+            <div class="bg-white p-8 md:p-12 rounded-3xl shadow-2xl border-2 border-amber-100 max-w-3xl text-center">
                 <div class="flex justify-center mb-6">
                     <img src="b8a0c5b01c5bff773945200dde0e00dd.jpg" class="w-24 h-24 object-contain opacity-80" alt="Bunga Dekorasi">
                 </div>
@@ -144,9 +140,7 @@
             
             <div class="relative max-w-5xl mx-auto px-6 text-center">
                 <h2 class="text-5xl font-serif-wedding text-amber-800 mb-16">Mempelai</h2>
-                
                 <div class="flex flex-col md:flex-row justify-center items-center gap-20">
-                    
                     <div id="area-pria" class="md:text-right flex-1 transition duration-500 hover:-translate-y-2">
                         <div class="w-48 h-48 mx-auto md:ml-auto bg-gray-200 rounded-full mb-6 overflow-hidden border-4 border-amber-700 shadow-xl">
                             <img src="https://via.placeholder.com/300x300?text=Octa" alt="Octa" class="w-full h-full object-cover">
@@ -155,9 +149,7 @@
                         <p class="text-sm text-stone-600 mt-2 font-bold tracking-wide">PUTRA KE-2 DARI</p>
                         <p class="text-stone-800 font-medium">Bpk. Jamarudin & Ibu Hendri Winartun</p>
                     </div>
-
                     <div class="text-6xl font-serif-wedding text-amber-600">&</div>
-
                     <div id="area-wanita" class="md:text-left flex-1 transition duration-500 hover:-translate-y-2">
                         <div class="w-48 h-48 mx-auto md:mr-auto bg-gray-200 rounded-full mb-6 overflow-hidden border-4 border-amber-700 shadow-xl">
                             <img src="https://via.placeholder.com/300x300?text=Novi" alt="Novi" class="w-full h-full object-cover">
@@ -175,18 +167,28 @@
                 <h2 class="text-4xl md:text-5xl font-serif-wedding text-amber-800 mb-12">Rangkaian Acara</h2>
                 
                 <div class="grid md:grid-cols-2 gap-8">
-                    <div class="bg-white p-10 rounded-3xl shadow-lg border-t-4 border-amber-700">
+                    <div class="bg-white p-10 rounded-3xl shadow-lg border-t-4 border-amber-700 hover:shadow-2xl transition">
                         <i class="fas fa-handshake text-4xl text-amber-700 mb-4"></i>
                         <h3 class="text-2xl font-bold mb-2 font-serif-wedding text-stone-800">Akad Nikah</h3>
                         <p class="font-bold text-lg text-amber-900">Sabtu, 30 Mei 2026</p>
-                        <p class="text-stone-600">08.00 - 10.00 WIB</p>
+                        <p class="text-stone-600 mb-4">08.00 - 10.00 WIB</p>
+                        <div class="border-t border-gray-200 pt-4 mt-4">
+                            <p class="font-semibold text-stone-700">Bertempat di:</p>
+                            <p class="text-stone-600 font-medium">Tembak Kemangi Resort</p>
+                            <p class="text-stone-500 text-sm">Ponorogo, Jawa Timur</p>
+                        </div>
                     </div>
 
-                    <div class="bg-white p-10 rounded-3xl shadow-lg border-t-4 border-amber-700">
+                    <div class="bg-white p-10 rounded-3xl shadow-lg border-t-4 border-amber-700 hover:shadow-2xl transition">
                         <i class="fas fa-glass-cheers text-4xl text-amber-700 mb-4"></i>
                         <h3 class="text-2xl font-bold mb-2 font-serif-wedding text-stone-800">Resepsi</h3>
                         <p class="font-bold text-lg text-amber-900">Sabtu, 30 Mei 2026</p>
-                        <p class="text-stone-600">11.00 WIB - Selesai</p>
+                        <p class="text-stone-600 mb-4">11.00 WIB - Selesai</p>
+                        <div class="border-t border-gray-200 pt-4 mt-4">
+                            <p class="font-semibold text-stone-700">Bertempat di:</p>
+                            <p class="text-stone-600 font-medium">Tembak Kemangi Resort</p>
+                            <p class="text-stone-500 text-sm">Ponorogo, Jawa Timur</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -194,23 +196,12 @@
 
         <section id="lokasi" class="min-h-screen flex flex-col items-center justify-center bg-stone-200 px-6 py-24 relative z-10">
             <h2 class="text-4xl md:text-5xl font-serif-wedding text-amber-800 mb-8">Lokasi Acara</h2>
-            
             <div class="bg-white p-6 rounded-3xl shadow-xl w-full max-w-4xl text-center">
                 <p class="text-xl font-bold mb-2 text-stone-800">Tembak Kemangi Resort</p>
                 <p class="text-stone-500 mb-6">Ponorogo, Jawa Timur</p>
-                
                 <div class="w-full h-64 md:h-96 bg-gray-300 rounded-xl mb-6 overflow-hidden relative">
-                    <iframe 
-                        width="100%" 
-                        height="100%" 
-                        frameborder="0" 
-                        scrolling="no" 
-                        marginheight="0" 
-                        marginwidth="0" 
-                        src="https://maps.google.com/maps?q=Ponorogo&t=&z=13&ie=UTF8&iwloc=&output=embed">
-                    </iframe>
+                    <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=Ponorogo&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
                 </div>
-
                 <a href="https://maps.app.goo.gl/TaGjz7SKxtKN225A7" target="_blank" class="inline-flex items-center justify-center gap-2 bg-amber-700 text-white px-10 py-4 rounded-full hover:bg-amber-800 transition transform hover:scale-105 shadow-lg">
                     <i class="fas fa-location-arrow animate-bounce"></i>
                     Buka Google Maps
@@ -227,98 +218,114 @@
     </div>
 
     <script>
-        // Fungsi Scroll Manual untuk Tombol Navigasi
         function scrollToSection(id) {
-            $('html, body').animate({
-                scrollTop: $(id).offset().top
-            }, 800);
+            $('html, body').animate({ scrollTop: $(id).offset().top }, 800);
         }
 
         $(document).ready(function() {
             var audio = document.getElementById("bg-music");
             var musicBtn = $("#music-toggle");
             var navMenu = $("#nav-menu");
-            var isPlaying = false;
+            var isMusicEnabled = false; // Penanda apakah user sudah klik Buka Undangan
 
             audio.load();
 
-            // TOMBOL BUKA UNDANGAN
+            // 1. TOMBOL BUKA UNDANGAN
             $("#open-invitation").click(function() {
+                isMusicEnabled = true; // Musik diizinkan menyala
                 $("#invitation-content").removeClass("hidden");
                 
-                // Scroll ke Ayat
+                // Scroll
                 setTimeout(function() {
-                    $('html, body').animate({
-                        scrollTop: $("#ayat").offset().top
-                    }, 1000);
+                    $('html, body').animate({ scrollTop: $("#ayat").offset().top }, 1000);
                 }, 50);
 
                 // Animasi Reog
                 $(".reog-left").animate({ left: "0px" }, 2000);
                 $(".reog-right").animate({ right: "0px" }, 2000);
 
-                // Play Music
-                var playPromise = audio.play();
-                if (playPromise !== undefined) {
-                    playPromise.then(_ => {
-                        isPlaying = true;
-                        musicBtn.removeClass("hidden");
-                        navMenu.removeClass("hidden").addClass("flex"); // Tampilkan menu navigasi
-                    })
-                    .catch(error => {
-                        musicBtn.removeClass("hidden");
-                        navMenu.removeClass("hidden").addClass("flex");
-                        $(musicBtn).find("i").removeClass("spin-slow fa-music").addClass("fa-volume-mute");
-                    });
-                }
+                // Play Musik
+                audio.play().then(() => {
+                    musicBtn.removeClass("hidden");
+                    navMenu.removeClass("hidden").addClass("flex");
+                }).catch(() => {
+                    musicBtn.removeClass("hidden");
+                    navMenu.removeClass("hidden").addClass("flex");
+                    $(musicBtn).find("i").removeClass("spin-slow fa-music").addClass("fa-volume-mute");
+                });
             });
 
-            // TOMBOL MUSIC
+            // 2. TOMBOL TOGGLE MUSIK MANUAL
             musicBtn.click(function() {
-                if (isPlaying) {
+                if (!audio.paused) {
                     audio.pause();
                     $(this).find("i").removeClass("spin-slow fa-music").addClass("fa-volume-mute");
-                    isPlaying = false;
                 } else {
                     audio.play();
                     $(this).find("i").removeClass("fa-volume-mute").addClass("spin-slow fa-music");
-                    isPlaying = true;
                 }
             });
 
-            // --- LOGIKA ANIMASI SCROLL MEMPELAI (POP-UP ICON) ---
+            // 3. LOGIKA SCROLL (HOME DETECTION)
             $(window).scroll(function() {
-                // Cek jika konten sudah terlihat
-                if($("#invitation-content").is(":hidden")) return;
+                // Jika undangan belum dibuka, abaikan
+                if(!isMusicEnabled) return;
 
-                var scrollTop = $(window).scrollTop();
+                var scrollPos = $(window).scrollTop();
+                var homeHeight = $("#home").outerHeight();
+                
+                // Batas trigger: Jika scroll masih di area Home (dikurangi sedikit buffer 100px)
+                if (scrollPos < (homeHeight - 100)) {
+                    // --- DI DALAM SECTION HOME ---
+                    // 1. Hide Navigasi & Tombol Musik
+                    navMenu.removeClass("flex").addClass("hidden");
+                    musicBtn.addClass("hidden");
+                    
+                    // 2. Pause Musik
+                    if (!audio.paused) {
+                        audio.pause();
+                        $(musicBtn).find("i").removeClass("spin-slow fa-music").addClass("fa-volume-mute");
+                    }
+
+                } else {
+                    // --- DI LUAR SECTION HOME (KONTEN) ---
+                    // 1. Show Navigasi & Tombol Musik
+                    navMenu.removeClass("hidden").addClass("flex");
+                    musicBtn.removeClass("hidden");
+
+                    // 2. Resume Musik (Hanya jika tadi otomatis dipause oleh sistem home)
+                    // Agar UX bagus, kita nyalakan musik lagi saat masuk konten
+                    if (audio.paused && isMusicEnabled) {
+                        audio.play().then(() => {
+                            $(musicBtn).find("i").removeClass("fa-volume-mute").addClass("spin-slow fa-music");
+                        }).catch(e => console.log("Auto-resume blocked"));
+                    }
+                }
+
+                // --- LOGIKA ANIMASI ICON MEMPELAI ---
                 var windowHeight = $(window).height();
-                var scrollCenter = scrollTop + (windowHeight / 2);
-
+                var scrollCenter = scrollPos + (windowHeight / 2);
                 var priaEl = $("#area-pria");
                 var wanitaEl = $("#area-wanita");
 
-                // Hitung posisi elemen
-                var priaTop = priaEl.offset().top;
-                var priaBottom = priaTop + priaEl.outerHeight();
-                
-                var wanitaTop = wanitaEl.offset().top;
-                var wanitaBottom = wanitaTop + wanitaEl.outerHeight();
-
-                // LOGIKA ICON PRIA
-                // Jika scroll berada di area Pria (dengan toleransi buffer)
-                if (scrollCenter > (priaTop - 100) && scrollCenter < (priaBottom + 50)) {
-                    $("#float-icon-pria").addClass("active");
-                } else {
-                    $("#float-icon-pria").removeClass("active");
+                // Icon Pria
+                if(priaEl.length) {
+                    var priaTop = priaEl.offset().top;
+                    if (scrollCenter > (priaTop - 150) && scrollCenter < (priaTop + priaEl.outerHeight() + 100)) {
+                        $("#float-icon-pria").addClass("active");
+                    } else {
+                        $("#float-icon-pria").removeClass("active");
+                    }
                 }
 
-                // LOGIKA ICON WANITA
-                // Jika scroll berada di area Wanita
-                if (scrollCenter > (wanitaTop - 100) && scrollCenter < (wanitaBottom + 50)) {
-                    $("#float-icon-wanita").addClass("active");
-                } else {
-                    $("#float-icon-wanita").removeClass("active");
+                // Icon Wanita
+                if(wanitaEl.length) {
+                    var wanitaTop = wanitaEl.offset().top;
+                    if (scrollCenter > (wanitaTop - 150) && scrollCenter < (wanitaTop + wanitaEl.outerHeight() + 100)) {
+                        $("#float-icon-wanita").addClass("active");
+                    } else {
+                        $("#float-icon-wanita").removeClass("active");
+                    }
                 }
             });
         });
