@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +10,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
@@ -20,90 +19,116 @@
         /* Animasi putar untuk ikon musik */
         .spin-slow { animation: spin 4s linear infinite; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        /* --- CSS KHUSUS REOG --- */
+        .reog-decoration {
+            position: absolute;
+            bottom: 0;
+            z-index: 0; /* Di belakang teks */
+            
+            /* Animasi Goyang (Seperti orang menari) */
+            animation: goyang 3s ease-in-out infinite alternate;
+        }
+
+        /* Keyframe agar reog terlihat 'hidup' (bergoyang pelan) */
+        @keyframes goyang {
+            0% { transform: rotate(-2deg); }
+            100% { transform: rotate(2deg); }
+        }
+        
+        /* Posisi Awal: Sembunyi di luar layar */
+        .reog-left-initial { left: -500px; } 
+        .reog-right-initial { right: -500px; }
     </style>
 </head>
 <body class="font-sans-wedding bg-stone-50 text-stone-800 antialiased overflow-x-hidden">
 
     <audio id="bg-music" loop>
         <source src="fiikuri-jedag-jedug-gamelan-free-for-use-328514.mp3" type="audio/mp3">
-        Browser Anda tidak mendukung audio element.
     </audio>
 
     <button id="music-toggle" class="fixed bottom-6 right-6 z-50 bg-amber-700 text-white p-4 rounded-full shadow-lg hover:bg-amber-800 transition hidden">
         <i class="fas fa-music spin-slow"></i>
     </button>
 
-    <section id="home" class="h-screen flex flex-col items-center justify-center bg-[url('https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1974&auto=format&fit=crop')] bg-cover bg-center relative">
-        <div class="absolute inset-0 bg-black/50"></div>
+    <section id="home" class="h-screen flex flex-col items-center justify-center bg-[url('https://images.unsplash.com/photo-1602906555084-c16bc9361af0?q=80&w=1470&auto=format&fit=crop')] bg-cover bg-center relative">
+        <div class="absolute inset-0 bg-amber-950/70"></div>
         
         <div class="relative text-center text-white p-6 z-10">
-            <h2 class="text-sm md:text-xl uppercase tracking-[0.3em] mb-4">The Wedding of</h2>
-            <h1 class="text-6xl md:text-8xl font-serif-wedding mb-4 text-amber-100">Octa & Novi</h1>
-            <p class="text-lg md:text-xl font-light mb-8">30 Mei 2026</p>
+            <h2 class="text-sm md:text-xl uppercase tracking-[0.3em] mb-4 text-amber-200">The Wedding of</h2>
+            <h1 class="text-6xl md:text-8xl font-serif-wedding mb-4 text-amber-100 drop-shadow-lg">Octa & Novi</h1>
+            <p class="text-lg md:text-xl font-light mb-8 text-amber-200">30 Mei 2026</p>
             
-            <button id="open-invitation" class="mt-4 bg-amber-700/80 backdrop-blur-sm border border-amber-600 px-8 py-3 rounded-full hover:bg-amber-600 transition duration-300 transform hover:scale-105">
+            <button id="open-invitation" class="mt-4 bg-amber-700/80 backdrop-blur-sm border border-amber-600 px-8 py-3 rounded-full hover:bg-amber-600 transition duration-300 transform hover:scale-105 shadow-lg">
                 Buka Undangan
             </button>
         </div>
     </section>
 
-    <div id="invitation-content" class="hidden">
+    <div id="invitation-content" class="hidden relative bg-stone-50 overflow-hidden min-h-screen">
 
-        <section id="mempelai" class="py-24 px-6 text-center max-w-4xl mx-auto">
+        <img src="reog-kiri.png" 
+             class="reog-decoration reog-left reog-left-initial w-32 md:w-64"
+             alt="Reog Kiri">
+
+        <img src="reog-kanan.webp" 
+             class="reog-decoration reog-right reog-right-initial w-40 md:w-80"
+             alt="Reog Kanan">
+        
+        <section id="mempelai" class="py-24 px-6 text-center max-w-5xl mx-auto relative z-10">
             <h2 class="text-4xl md:text-5xl font-serif-wedding text-amber-800 mb-12">Mempelai</h2>
             
-            <div class="flex flex-col md:flex-row justify-center items-center gap-12 md:gap-24">
-                <div class="md:text-right">
+            <div class="flex flex-col md:flex-row justify-center items-center gap-12 md:gap-16">
+                
+                <div class="md:text-right flex-1">
                     <div class="w-40 h-40 mx-auto md:ml-auto bg-gray-300 rounded-full mb-6 overflow-hidden border-4 border-amber-700 shadow-xl">
                         <img src="https://via.placeholder.com/300x300?text=Octa" alt="Octa" class="w-full h-full object-cover">
                     </div>
-                    <h3 class="text-3xl font-serif-wedding font-bold text-stone-800">Octa</h3>
-                    <p class="font-semibold mt-2">Octarudin Mahendra</p>
-                    <p class="text-sm text-stone-500">Putra Bpk. Jamarudin & Ibu Hendri Winartun</p>
+                    <h3 class="text-3xl font-serif-wedding font-bold text-stone-800">Octarudin Mahendra</h3>
+                    <p class="text-sm text-stone-500 mt-2 font-medium">Putra ke-2 dari</p>
+                    <p class="text-stone-700">Bpk. Jamarudin & Ibu Hendri Winartun</p>
                 </div>
 
                 <div class="text-5xl font-serif-wedding text-amber-700">&</div>
 
-                <div class="md:text-left">
+                <div class="md:text-left flex-1">
                     <div class="w-40 h-40 mx-auto md:mr-auto bg-gray-300 rounded-full mb-6 overflow-hidden border-4 border-amber-700 shadow-xl">
                         <img src="https://via.placeholder.com/300x300?text=Novi" alt="Novi" class="w-full h-full object-cover">
                     </div>
-                    <h3 class="text-3xl font-serif-wedding font-bold text-stone-800">Novi</h3>
-                    <p class="font-semibold mt-2">Novi Sebtian Amelia</p>
-                    <p class="text-sm text-stone-500">Putri Bpk. Syamsi & Ibu Suparmi</p>
+                    <h3 class="text-3xl font-serif-wedding font-bold text-stone-800">Novi Sebtian Amelia</h3>
+                    <p class="text-sm text-stone-500 mt-2 font-medium">Putri dari</p>
+                    <p class="text-stone-700">Bpk. Syamsi & Ibu Suparmi</p>
                 </div>
             </div>
         </section>
 
-        <section id="acara" class="py-24 bg-stone-100 px-6 relative">
-            <div class="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-white to-transparent"></div>
-
+        <section id="acara" class="py-24 bg-amber-50/50 px-6 relative z-10">
             <div class="max-w-4xl mx-auto text-center">
                 <h2 class="text-4xl md:text-5xl font-serif-wedding text-amber-800 mb-16">Rangkaian Acara</h2>
                 
                 <div class="grid md:grid-cols-2 gap-8 mb-12">
-                    <div class="bg-white p-10 rounded-3xl shadow-lg border-b-4 border-amber-700 transform hover:-translate-y-2 transition duration-300">
+                    <div class="bg-white/90 backdrop-blur-sm p-10 rounded-3xl shadow-lg border-b-4 border-amber-700">
                         <i class="fas fa-handshake text-4xl text-amber-700 mb-4"></i>
                         <h3 class="text-2xl font-bold mb-2 font-serif-wedding text-stone-800">Akad Nikah</h3>
                         <div class="w-16 h-1 bg-amber-700 mx-auto mb-6"></div>
                         <p class="font-bold text-lg">Sabtu, 30 Mei 2026</p>
                         <p class="text-stone-600 mb-4">08.00 - 10.00 WIB</p>
-                        <p class="text-sm text-stone-500">Tembak Kemangi Resort</p>
+                        <p class="text-sm text-stone-500 font-bold">Tembak Kemangi Resort</p>
                         <p class="text-sm text-stone-500">Ponorogo</p>
                     </div>
 
-                    <div class="bg-white p-10 rounded-3xl shadow-lg border-b-4 border-amber-700 transform hover:-translate-y-2 transition duration-300">
+                    <div class="bg-white/90 backdrop-blur-sm p-10 rounded-3xl shadow-lg border-b-4 border-amber-700">
                         <i class="fas fa-glass-cheers text-4xl text-amber-700 mb-4"></i>
                         <h3 class="text-2xl font-bold mb-2 font-serif-wedding text-stone-800">Resepsi</h3>
                         <div class="w-16 h-1 bg-amber-700 mx-auto mb-6"></div>
                         <p class="font-bold text-lg">Sabtu, 30 Mei 2026</p>
                         <p class="text-stone-600 mb-4">11.00 WIB - Selesai</p>
-                        <p class="text-sm text-stone-500">Tembak Kemangi Resort</p>
+                        <p class="text-sm text-stone-500 font-bold">Tembak Kemangi Resort</p>
                         <p class="text-sm text-stone-500">Ponorogo</p>
                     </div>
                 </div>
 
-                <div class="bg-white p-4 rounded-xl shadow-md inline-block">
+                <div class="bg-white/90 p-4 rounded-xl shadow-md inline-block">
                     <p class="mb-4 font-semibold text-stone-700">Lokasi Acara:</p>
                     <a href="https://maps.app.goo.gl/TaGjz7SKxtKN225A7" target="_blank" class="flex items-center justify-center gap-2 bg-amber-700 text-white px-8 py-3 rounded-lg hover:bg-amber-800 transition group">
                         <i class="fas fa-map-marker-alt group-hover:animate-bounce"></i>
@@ -113,10 +138,10 @@
             </div>
         </section>
 
-        <footer class="py-12 bg-stone-900 text-stone-400 text-center text-sm">
-            <h2 class="text-3xl font-serif-wedding text-stone-200 mb-4">Octa & Novi</h2>
+        <footer class="py-12 bg-amber-950 text-amber-200 text-center text-sm relative z-10">
+            <h2 class="text-3xl font-serif-wedding mb-4">Octa & Novi</h2>
             <p class="mb-8">Terima kasih atas doa & restu Bapak/Ibu/Saudara/i</p>
-            <p>© 2026 Octa & Novi Wedding.</p>
+            <p class="opacity-50">© 2026 Octa & Novi Wedding.</p>
         </footer>
         
     </div>
@@ -127,36 +152,36 @@
             var musicBtn = $("#music-toggle");
             var isPlaying = false;
 
-            // Fungsi untuk Scroll Halus (Smooth Scroll)
-            // Ini akan menangani semua link yang berawalan '#'
-            $('a[href^="#"]').on('click', function(event) {
-                var target = $(this.getAttribute('href'));
-                if( target.length ) {
-                    event.preventDefault();
-                    $('html, body').stop().animate({
-                        scrollTop: target.offset().top
-                    }, 1000); // Durasi scroll 1000ms (1 detik)
-                }
-            });
-
-            // Logic Tombol Buka Undangan
+            // Tombol Buka Undangan
             $("#open-invitation").click(function() {
-                // Scroll ke bagian mempelai
                 $("#invitation-content").removeClass("hidden");
+                
+                // 1. Scroll halus ke bagian mempelai
                 $('html, body').animate({
                     scrollTop: $("#mempelai").offset().top
-                }, 1000);
+                }, 1500);
 
-                // Mulai Musik
+                // 2. Animasi REOG BERJALAN MASUK
+                // Reog Kiri: Geser dari left:-500px ke left:0
+                $(".reog-left").animate({
+                    left: "0px" 
+                }, 2500); // Durasi 2.5 detik
+
+                // Reog Kanan: Geser dari right:-500px ke right:0
+                $(".reog-right").animate({
+                    right: "0px"
+                }, 2500);
+
+                // 3. Play Music
                 audio.play().then(function() {
                     isPlaying = true;
-                    musicBtn.removeClass("hidden"); // Tampilkan tombol musik
+                    musicBtn.removeClass("hidden");
                 }).catch(function(error) {
-                    console.log("Autoplay dicegah browser, perlu interaksi user lagi.");
+                    console.log("Autoplay blocked.");
                 });
             });
 
-            // Logic Tombol Toggle Musik
+            // Toggle Music
             musicBtn.click(function() {
                 if (isPlaying) {
                     audio.pause();
