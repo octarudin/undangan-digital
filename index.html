@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Wedding of Octa & Novi</title>
     
+    <link rel="preload" as="image" href="bg-2-scaled.jpg">
+
     <script src="https://cdn.tailwindcss.com"></script>
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -24,26 +26,33 @@
         .reog-decoration {
             position: absolute;
             bottom: 0;
-            z-index: 0; /* Di belakang teks */
+            z-index: 5; /* Pastikan di atas background tapi di bawah teks modal */
+            pointer-events: none; /* Agar klik tembus ke bawah */
             
-            /* Animasi Goyang (Seperti orang menari) */
+            /* Animasi Goyang Halus */
             animation: goyang 3s ease-in-out infinite alternate;
         }
 
-        /* Keyframe agar reog terlihat 'hidup' (bergoyang pelan) */
         @keyframes goyang {
             0% { transform: rotate(-2deg); }
             100% { transform: rotate(2deg); }
         }
         
-        /* Posisi Awal: Sembunyi di luar layar */
-        .reog-left-initial { left: -500px; } 
-        .reog-right-initial { right: -500px; }
+        /* Posisi Awal: Sembunyi jauh di luar layar */
+        .reog-left-initial { left: -100%; } 
+        .reog-right-initial { right: -100%; }
+        
+        /* Agar background cover penuh dan center */
+        .bg-cover-custom {
+            background-image: url('bg-2-scaled.jpg');
+            background-size: cover;
+            background-position: center;
+        }
     </style>
 </head>
 <body class="font-sans-wedding bg-stone-50 text-stone-800 antialiased overflow-x-hidden">
 
-    <audio id="bg-music" loop>
+    <audio id="bg-music" loop preload="auto">
         <source src="fiikuri-jedag-jedug-gamelan-free-for-use-328514.mp3" type="audio/mp3">
     </audio>
 
@@ -51,15 +60,15 @@
         <i class="fas fa-music spin-slow"></i>
     </button>
 
-    <section id="home" class="h-screen flex flex-col items-center justify-center bg-[url('https://images.unsplash.com/photo-1602906555084-c16bc9361af0?q=80&w=1470&auto=format&fit=crop')] bg-cover bg-center relative">
-        <div class="absolute inset-0 bg-amber-950/70"></div>
+    <section id="home" class="h-screen flex flex-col items-center justify-center bg-cover-custom relative">
+        <div class="absolute inset-0 bg-white/30 backdrop-blur-[2px]"></div>
         
-        <div class="relative text-center text-white p-6 z-10">
-            <h2 class="text-sm md:text-xl uppercase tracking-[0.3em] mb-4 text-amber-200">The Wedding of</h2>
-            <h1 class="text-6xl md:text-8xl font-serif-wedding mb-4 text-amber-100 drop-shadow-lg">Octa & Novi</h1>
-            <p class="text-lg md:text-xl font-light mb-8 text-amber-200">30 Mei 2026</p>
+        <div class="relative text-center p-6 z-10">
+            <h2 class="text-sm md:text-xl uppercase tracking-[0.3em] mb-4 text-stone-700 font-bold">The Wedding of</h2>
+            <h1 class="text-6xl md:text-9xl font-serif-wedding mb-4 text-amber-800 drop-shadow-sm">Octa & Novi</h1>
+            <p class="text-lg md:text-2xl font-semibold mb-8 text-stone-700">30 Mei 2026</p>
             
-            <button id="open-invitation" class="mt-4 bg-amber-700/80 backdrop-blur-sm border border-amber-600 px-8 py-3 rounded-full hover:bg-amber-600 transition duration-300 transform hover:scale-105 shadow-lg">
+            <button id="open-invitation" class="mt-4 bg-amber-800 text-white px-8 py-3 rounded-full hover:bg-amber-900 transition duration-300 transform hover:scale-105 shadow-xl border-2 border-amber-700">
                 Buka Undangan
             </button>
         </div>
@@ -79,9 +88,8 @@
             <h2 class="text-4xl md:text-5xl font-serif-wedding text-amber-800 mb-12">Mempelai</h2>
             
             <div class="flex flex-col md:flex-row justify-center items-center gap-12 md:gap-16">
-                
                 <div class="md:text-right flex-1">
-                    <div class="w-40 h-40 mx-auto md:ml-auto bg-gray-300 rounded-full mb-6 overflow-hidden border-4 border-amber-700 shadow-xl">
+                    <div class="w-40 h-40 mx-auto md:ml-auto bg-gray-200 rounded-full mb-6 overflow-hidden border-4 border-amber-700 shadow-xl">
                         <img src="https://via.placeholder.com/300x300?text=Octa" alt="Octa" class="w-full h-full object-cover">
                     </div>
                     <h3 class="text-3xl font-serif-wedding font-bold text-stone-800">Octarudin Mahendra</h3>
@@ -92,7 +100,7 @@
                 <div class="text-5xl font-serif-wedding text-amber-700">&</div>
 
                 <div class="md:text-left flex-1">
-                    <div class="w-40 h-40 mx-auto md:mr-auto bg-gray-300 rounded-full mb-6 overflow-hidden border-4 border-amber-700 shadow-xl">
+                    <div class="w-40 h-40 mx-auto md:mr-auto bg-gray-200 rounded-full mb-6 overflow-hidden border-4 border-amber-700 shadow-xl">
                         <img src="https://via.placeholder.com/300x300?text=Novi" alt="Novi" class="w-full h-full object-cover">
                     </div>
                     <h3 class="text-3xl font-serif-wedding font-bold text-stone-800">Novi Sebtian Amelia</h3>
@@ -138,7 +146,7 @@
             </div>
         </section>
 
-        <footer class="py-12 bg-amber-950 text-amber-200 text-center text-sm relative z-10">
+        <footer class="py-12 bg-stone-900 text-amber-100 text-center text-sm relative z-10">
             <h2 class="text-3xl font-serif-wedding mb-4">Octa & Novi</h2>
             <p class="mb-8">Terima kasih atas doa & restu Bapak/Ibu/Saudara/i</p>
             <p class="opacity-50">© 2026 Octa & Novi Wedding.</p>
@@ -152,36 +160,43 @@
             var musicBtn = $("#music-toggle");
             var isPlaying = false;
 
-            // Tombol Buka Undangan
+            // PRELOAD AUDIO AGAR SIAP DIPUTAR
+            audio.load();
+
             $("#open-invitation").click(function() {
+                // 1. TAMPILKAN KONTEN & SCROLL (LANGSUNG, TANPA MENUNGGU AUDIO)
                 $("#invitation-content").removeClass("hidden");
                 
-                // 1. Scroll halus ke bagian mempelai
-                $('html, body').animate({
-                    scrollTop: $("#mempelai").offset().top
-                }, 1500);
+                // Gunakan timeout sangat kecil untuk memastikan DOM render dulu sebelum scroll
+                setTimeout(function() {
+                    $('html, body').animate({
+                        scrollTop: $("#mempelai").offset().top
+                    }, 1000); // Durasi scroll 1 detik
+                }, 50);
 
-                // 2. Animasi REOG BERJALAN MASUK
-                // Reog Kiri: Geser dari left:-500px ke left:0
-                $(".reog-left").animate({
-                    left: "0px" 
-                }, 2500); // Durasi 2.5 detik
+                // 2. JALANKAN ANIMASI REOG (Asynchronous)
+                $(".reog-left").animate({ left: "0px" }, 2000);
+                $(".reog-right").animate({ right: "0px" }, 2000);
 
-                // Reog Kanan: Geser dari right:-500px ke right:0
-                $(".reog-right").animate({
-                    right: "0px"
-                }, 2500);
+                // 3. PUTAR MUSIK (Terakhir, jika gagal tidak memblokir scroll)
+                var playPromise = audio.play();
 
-                // 3. Play Music
-                audio.play().then(function() {
-                    isPlaying = true;
-                    musicBtn.removeClass("hidden");
-                }).catch(function(error) {
-                    console.log("Autoplay blocked.");
-                });
+                if (playPromise !== undefined) {
+                    playPromise.then(_ => {
+                        // Audio berputar
+                        isPlaying = true;
+                        musicBtn.removeClass("hidden");
+                    })
+                    .catch(error => {
+                        // Auto-play dicegah browser, biarkan saja hening sampai user klik tombol musik
+                        console.log("Audio autoplay dicegah, menunggu interaksi user.");
+                        musicBtn.removeClass("hidden"); // Tetap munculkan tombol agar user bisa nyalakan manual
+                        $(musicBtn).find("i").removeClass("spin-slow fa-music").addClass("fa-volume-mute");
+                    });
+                }
             });
 
-            // Toggle Music
+            // Toggle Music Button Logic
             musicBtn.click(function() {
                 if (isPlaying) {
                     audio.pause();
