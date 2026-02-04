@@ -23,11 +23,11 @@
         .spin-slow { animation: spin 4s linear infinite; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        /* --- CSS REOG --- */
+        /* --- CSS REOG DEPAN --- */
         .reog-decoration {
             position: absolute;
             bottom: 0;
-            z-index: 5; /* Di bawah teks section */
+            z-index: 5;
             pointer-events: none;
             animation: goyang 3s ease-in-out infinite alternate;
         }
@@ -38,15 +38,33 @@
         .reog-left-initial { left: -100%; } 
         .reog-right-initial { right: -100%; }
         
-        /* --- CSS BACKGROUND HOME --- */
+        /* --- BACKGROUND CUSTOM --- */
         .bg-cover-custom {
-            /* Warna cadangan jika gambar gagal memuat agar teks tetap terbaca */
             background-color: #451a03; 
-            /* Gambar Utama */
             background-image: url('bg-2-scaled.jpg');
             background-size: cover;
             background-position: center;
         }
+        
+        /* --- ANIMASI MEMPELAI POP-UP --- */
+        .couple-icon {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 40;
+            opacity: 0;
+            transition: all 0.5s ease-in-out;
+            pointer-events: none;
+        }
+        
+        /* Posisi awal sembunyi */
+        .icon-pria { left: -100px; }
+        .icon-wanita { right: -100px; }
+
+        /* Posisi aktif muncul */
+        .icon-pria.active { left: 20px; opacity: 1; }
+        .icon-wanita.active { right: 20px; opacity: 1; }
+
     </style>
 </head>
 <body class="font-sans-wedding bg-stone-50 text-stone-800 antialiased overflow-x-hidden">
@@ -55,9 +73,37 @@
         <source src="fiikuri-jedag-jedug-gamelan-free-for-use-328514.mp3" type="audio/mp3">
     </audio>
 
-    <button id="music-toggle" class="fixed bottom-6 right-6 z-50 bg-amber-700 text-white p-4 rounded-full shadow-lg hover:bg-amber-800 transition hidden">
-        <i class="fas fa-music spin-slow"></i>
-    </button>
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3 items-center">
+        
+        <div id="nav-menu" class="hidden flex-col gap-3 mb-2 transition-all duration-300">
+            <button onclick="scrollToSection('#home')" class="bg-white text-amber-800 p-3 rounded-full shadow-lg hover:bg-amber-100 w-10 h-10 flex items-center justify-center text-xs" title="Home">
+                <i class="fas fa-home"></i>
+            </button>
+            <button onclick="scrollToSection('#ayat')" class="bg-white text-amber-800 p-3 rounded-full shadow-lg hover:bg-amber-100 w-10 h-10 flex items-center justify-center text-xs" title="Ayat">
+                <i class="fas fa-book-open"></i>
+            </button>
+            <button onclick="scrollToSection('#mempelai')" class="bg-white text-amber-800 p-3 rounded-full shadow-lg hover:bg-amber-100 w-10 h-10 flex items-center justify-center text-xs" title="Mempelai">
+                <i class="fas fa-heart"></i>
+            </button>
+            <button onclick="scrollToSection('#acara')" class="bg-white text-amber-800 p-3 rounded-full shadow-lg hover:bg-amber-100 w-10 h-10 flex items-center justify-center text-xs" title="Acara">
+                <i class="fas fa-calendar-alt"></i>
+            </button>
+            <button onclick="scrollToSection('#lokasi')" class="bg-white text-amber-800 p-3 rounded-full shadow-lg hover:bg-amber-100 w-10 h-10 flex items-center justify-center text-xs" title="Lokasi">
+                <i class="fas fa-map-marker-alt"></i>
+            </button>
+        </div>
+
+        <button id="music-toggle" class="bg-amber-700 text-white p-4 rounded-full shadow-xl hover:bg-amber-800 transition hidden relative">
+            <i class="fas fa-music spin-slow text-lg"></i>
+        </button>
+    </div>
+
+    <div id="float-icon-pria" class="couple-icon icon-pria bg-white p-3 rounded-full shadow-xl border-2 border-amber-700">
+        <i class="fas fa-male text-4xl text-amber-800 w-8 h-8 flex items-center justify-center"></i>
+    </div>
+    <div id="float-icon-wanita" class="couple-icon icon-wanita bg-white p-3 rounded-full shadow-xl border-2 border-amber-700">
+        <i class="fas fa-female text-4xl text-amber-800 w-8 h-8 flex items-center justify-center"></i>
+    </div>
 
     <section id="home" class="h-screen flex flex-col items-center justify-center bg-cover-custom relative">
         <div class="absolute inset-0 bg-white/20 backdrop-blur-[1px]"></div>
@@ -73,49 +119,52 @@
         </div>
     </section>
 
-    <div id="invitation-content" class="hidden relative bg-stone-50 overflow-hidden min-h-screen">
+    <div id="invitation-content" class="hidden relative bg-stone-50 overflow-hidden">
 
         <img src="reog-kiri.png" class="reog-decoration reog-left reog-left-initial w-32 md:w-64" alt="Reog Kiri">
         <img src="reog-kanan.webp" class="reog-decoration reog-right reog-right-initial w-40 md:w-80" alt="Reog Kanan">
         
-        <section id="ayat" class="pt-24 pb-12 px-6 text-center max-w-3xl mx-auto relative z-10">
-            <div class="bg-white/80 backdrop-blur-sm p-8 md:p-12 rounded-3xl shadow-lg border border-amber-100">
+        <section id="ayat" class="min-h-screen flex items-center justify-center px-6 py-24 bg-amber-50 relative z-10">
+            <div class="bg-white p-8 md:p-12 rounded-3xl shadow-2xl border-2 border-amber-100 max-w-3xl text-center transform hover:scale-[1.01] transition duration-500">
                 <div class="flex justify-center mb-6">
                     <img src="b8a0c5b01c5bff773945200dde0e00dd.jpg" class="w-24 h-24 object-contain opacity-80" alt="Bunga Dekorasi">
                 </div>
                 <h3 class="text-amber-800 font-serif-wedding text-3xl md:text-4xl mb-6">Q.S Ar-Rum: 21</h3>
                 <p class="font-arab text-2xl md:text-3xl text-stone-700 leading-loose mb-6" dir="rtl">
-                    وَمِنْ ءَايَٰتِهِۦٓ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَٰجًا لِّتَسْكُنُوٓا۟ إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِى ذَٰلِكَ لَءَايَٰتٍ لِّقَوْمٍ يَتَفَكَّرُونَ
+                    وَمِنْ ءَايَٰتِهِۦٓ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَٰجًا لِّتَسْكُنُوٓا۟ إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً
                 </p>
                 <p class="text-sm md:text-base text-stone-600 italic leading-relaxed">
-                    "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. Sungguh, pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang berpikir."
+                    "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri..."
                 </p>
             </div>
         </section>
 
-        <section id="mempelai" class="py-24 bg-amber-50 relative z-10">
-            <div class="max-w-5xl mx-auto px-6 text-center">
-                <h2 class="text-4xl md:text-5xl font-serif-wedding text-amber-800 mb-12">Mempelai</h2>
+        <section id="mempelai" class="py-32 bg-cover-custom relative z-10">
+            <div class="absolute inset-0 bg-white/80"></div>
+            
+            <div class="relative max-w-5xl mx-auto px-6 text-center">
+                <h2 class="text-5xl font-serif-wedding text-amber-800 mb-16">Mempelai</h2>
                 
-                <div class="flex flex-col md:flex-row justify-center items-center gap-12 md:gap-16">
-                    <div class="md:text-right flex-1">
-                        <div class="w-40 h-40 mx-auto md:ml-auto bg-gray-200 rounded-full mb-6 overflow-hidden border-4 border-amber-700 shadow-xl">
+                <div class="flex flex-col md:flex-row justify-center items-center gap-20">
+                    
+                    <div id="area-pria" class="md:text-right flex-1 transition duration-500 hover:-translate-y-2">
+                        <div class="w-48 h-48 mx-auto md:ml-auto bg-gray-200 rounded-full mb-6 overflow-hidden border-4 border-amber-700 shadow-xl">
                             <img src="https://via.placeholder.com/300x300?text=Octa" alt="Octa" class="w-full h-full object-cover">
                         </div>
-                        <h3 class="text-3xl font-serif-wedding font-bold text-stone-800">Octarudin Mahendra</h3>
-                        <p class="text-sm text-stone-500 mt-2 font-medium">Putra ke-2 dari</p>
-                        <p class="text-stone-700">Bpk. Jamarudin & Ibu Hendri Winartun</p>
+                        <h3 class="text-4xl font-serif-wedding font-bold text-stone-800">Octarudin Mahendra</h3>
+                        <p class="text-sm text-stone-600 mt-2 font-bold tracking-wide">PUTRA KE-2 DARI</p>
+                        <p class="text-stone-800 font-medium">Bpk. Jamarudin & Ibu Hendri Winartun</p>
                     </div>
 
-                    <div class="text-5xl font-serif-wedding text-amber-700">&</div>
+                    <div class="text-6xl font-serif-wedding text-amber-600">&</div>
 
-                    <div class="md:text-left flex-1">
-                        <div class="w-40 h-40 mx-auto md:mr-auto bg-gray-200 rounded-full mb-6 overflow-hidden border-4 border-amber-700 shadow-xl">
-                             <img src="https://via.placeholder.com/300x300?text=Novi" alt="Novi" class="w-full h-full object-cover">
+                    <div id="area-wanita" class="md:text-left flex-1 transition duration-500 hover:-translate-y-2">
+                        <div class="w-48 h-48 mx-auto md:mr-auto bg-gray-200 rounded-full mb-6 overflow-hidden border-4 border-amber-700 shadow-xl">
+                            <img src="https://via.placeholder.com/300x300?text=Novi" alt="Novi" class="w-full h-full object-cover">
                         </div>
-                        <h3 class="text-3xl font-serif-wedding font-bold text-stone-800">Novi Sebtian Amelia</h3>
-                        <p class="text-sm text-stone-500 mt-2 font-medium">Putri dari</p>
-                        <p class="text-stone-700">Bpk. Syamsi & Ibu Suparmi</p>
+                        <h3 class="text-4xl font-serif-wedding font-bold text-stone-800">Novi Sebtian Amelia</h3>
+                        <p class="text-sm text-stone-600 mt-2 font-bold tracking-wide">PUTRI DARI</p>
+                        <p class="text-stone-800 font-medium">Bpk. Syamsi & Ibu Suparmi</p>
                     </div>
                 </div>
             </div>
@@ -123,37 +172,49 @@
 
         <section id="acara" class="py-24 bg-stone-100 px-6 relative z-10">
             <div class="max-w-4xl mx-auto text-center">
-                <h2 class="text-4xl md:text-5xl font-serif-wedding text-amber-800 mb-16">Rangkaian Acara</h2>
+                <h2 class="text-4xl md:text-5xl font-serif-wedding text-amber-800 mb-12">Rangkaian Acara</h2>
                 
-                <div class="grid md:grid-cols-2 gap-8 mb-12">
-                    <div class="bg-white/90 backdrop-blur-sm p-10 rounded-3xl shadow-lg border-b-4 border-amber-700">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-white p-10 rounded-3xl shadow-lg border-t-4 border-amber-700">
                         <i class="fas fa-handshake text-4xl text-amber-700 mb-4"></i>
                         <h3 class="text-2xl font-bold mb-2 font-serif-wedding text-stone-800">Akad Nikah</h3>
-                        <div class="w-16 h-1 bg-amber-700 mx-auto mb-6"></div>
-                        <p class="font-bold text-lg">Sabtu, 30 Mei 2026</p>
-                        <p class="text-stone-600 mb-4">08.00 - 10.00 WIB</p>
-                        <p class="text-sm text-stone-500 font-bold">Tembak Kemangi Resort</p>
-                        <p class="text-sm text-stone-500">Ponorogo</p>
+                        <p class="font-bold text-lg text-amber-900">Sabtu, 30 Mei 2026</p>
+                        <p class="text-stone-600">08.00 - 10.00 WIB</p>
                     </div>
 
-                    <div class="bg-white/90 backdrop-blur-sm p-10 rounded-3xl shadow-lg border-b-4 border-amber-700">
+                    <div class="bg-white p-10 rounded-3xl shadow-lg border-t-4 border-amber-700">
                         <i class="fas fa-glass-cheers text-4xl text-amber-700 mb-4"></i>
                         <h3 class="text-2xl font-bold mb-2 font-serif-wedding text-stone-800">Resepsi</h3>
-                        <div class="w-16 h-1 bg-amber-700 mx-auto mb-6"></div>
-                        <p class="font-bold text-lg">Sabtu, 30 Mei 2026</p>
-                        <p class="text-stone-600 mb-4">11.00 WIB - Selesai</p>
-                        <p class="text-sm text-stone-500 font-bold">Tembak Kemangi Resort</p>
-                        <p class="text-sm text-stone-500">Ponorogo</p>
+                        <p class="font-bold text-lg text-amber-900">Sabtu, 30 Mei 2026</p>
+                        <p class="text-stone-600">11.00 WIB - Selesai</p>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <div class="bg-white/90 p-4 rounded-xl shadow-md inline-block">
-                    <p class="mb-4 font-semibold text-stone-700">Lokasi Acara:</p>
-                    <a href="https://maps.app.goo.gl/TaGjz7SKxtKN225A7" target="_blank" class="flex items-center justify-center gap-2 bg-amber-700 text-white px-8 py-3 rounded-lg hover:bg-amber-800 transition group">
-                        <i class="fas fa-map-marker-alt group-hover:animate-bounce"></i>
-                        Lihat Google Maps
-                    </a>
+        <section id="lokasi" class="min-h-screen flex flex-col items-center justify-center bg-stone-200 px-6 py-24 relative z-10">
+            <h2 class="text-4xl md:text-5xl font-serif-wedding text-amber-800 mb-8">Lokasi Acara</h2>
+            
+            <div class="bg-white p-6 rounded-3xl shadow-xl w-full max-w-4xl text-center">
+                <p class="text-xl font-bold mb-2 text-stone-800">Tembak Kemangi Resort</p>
+                <p class="text-stone-500 mb-6">Ponorogo, Jawa Timur</p>
+                
+                <div class="w-full h-64 md:h-96 bg-gray-300 rounded-xl mb-6 overflow-hidden relative">
+                    <iframe 
+                        width="100%" 
+                        height="100%" 
+                        frameborder="0" 
+                        scrolling="no" 
+                        marginheight="0" 
+                        marginwidth="0" 
+                        src="https://maps.google.com/maps?q=Ponorogo&t=&z=13&ie=UTF8&iwloc=&output=embed">
+                    </iframe>
                 </div>
+
+                <a href="https://maps.app.goo.gl/TaGjz7SKxtKN225A7" target="_blank" class="inline-flex items-center justify-center gap-2 bg-amber-700 text-white px-10 py-4 rounded-full hover:bg-amber-800 transition transform hover:scale-105 shadow-lg">
+                    <i class="fas fa-location-arrow animate-bounce"></i>
+                    Buka Google Maps
+                </a>
             </div>
         </section>
 
@@ -166,24 +227,33 @@
     </div>
 
     <script>
+        // Fungsi Scroll Manual untuk Tombol Navigasi
+        function scrollToSection(id) {
+            $('html, body').animate({
+                scrollTop: $(id).offset().top
+            }, 800);
+        }
+
         $(document).ready(function() {
             var audio = document.getElementById("bg-music");
             var musicBtn = $("#music-toggle");
+            var navMenu = $("#nav-menu");
             var isPlaying = false;
 
             audio.load();
 
+            // TOMBOL BUKA UNDANGAN
             $("#open-invitation").click(function() {
                 $("#invitation-content").removeClass("hidden");
                 
-                // Scroll ke #ayat
+                // Scroll ke Ayat
                 setTimeout(function() {
                     $('html, body').animate({
                         scrollTop: $("#ayat").offset().top
                     }, 1000);
                 }, 50);
 
-                // Animasi Reog Masuk
+                // Animasi Reog
                 $(".reog-left").animate({ left: "0px" }, 2000);
                 $(".reog-right").animate({ right: "0px" }, 2000);
 
@@ -193,15 +263,17 @@
                     playPromise.then(_ => {
                         isPlaying = true;
                         musicBtn.removeClass("hidden");
+                        navMenu.removeClass("hidden").addClass("flex"); // Tampilkan menu navigasi
                     })
                     .catch(error => {
-                        console.log("Audio autoplay dicegah.");
                         musicBtn.removeClass("hidden");
+                        navMenu.removeClass("hidden").addClass("flex");
                         $(musicBtn).find("i").removeClass("spin-slow fa-music").addClass("fa-volume-mute");
                     });
                 }
             });
 
+            // TOMBOL MUSIC
             musicBtn.click(function() {
                 if (isPlaying) {
                     audio.pause();
@@ -211,6 +283,42 @@
                     audio.play();
                     $(this).find("i").removeClass("fa-volume-mute").addClass("spin-slow fa-music");
                     isPlaying = true;
+                }
+            });
+
+            // --- LOGIKA ANIMASI SCROLL MEMPELAI (POP-UP ICON) ---
+            $(window).scroll(function() {
+                // Cek jika konten sudah terlihat
+                if($("#invitation-content").is(":hidden")) return;
+
+                var scrollTop = $(window).scrollTop();
+                var windowHeight = $(window).height();
+                var scrollCenter = scrollTop + (windowHeight / 2);
+
+                var priaEl = $("#area-pria");
+                var wanitaEl = $("#area-wanita");
+
+                // Hitung posisi elemen
+                var priaTop = priaEl.offset().top;
+                var priaBottom = priaTop + priaEl.outerHeight();
+                
+                var wanitaTop = wanitaEl.offset().top;
+                var wanitaBottom = wanitaTop + wanitaEl.outerHeight();
+
+                // LOGIKA ICON PRIA
+                // Jika scroll berada di area Pria (dengan toleransi buffer)
+                if (scrollCenter > (priaTop - 100) && scrollCenter < (priaBottom + 50)) {
+                    $("#float-icon-pria").addClass("active");
+                } else {
+                    $("#float-icon-pria").removeClass("active");
+                }
+
+                // LOGIKA ICON WANITA
+                // Jika scroll berada di area Wanita
+                if (scrollCenter > (wanitaTop - 100) && scrollCenter < (wanitaBottom + 50)) {
+                    $("#float-icon-wanita").addClass("active");
+                } else {
+                    $("#float-icon-wanita").removeClass("active");
                 }
             });
         });
